@@ -1,0 +1,12 @@
+---
+
+- hosts: LAB_ubuntu
+  become: true
+  tasks:
+
+  - name: Remove TMUX package from Ubuntu VMs
+    apt:
+      name: tmux
+      state: absent
+     
+  

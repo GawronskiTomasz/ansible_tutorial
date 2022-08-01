@@ -1,0 +1,20 @@
+---
+
+- hosts: LAB_ubuntu
+  become: true
+  tasks:
+
+  - name: Update repository index
+    apt:
+      update_cache: yes
+
+  - name: Upgrade packages
+    apt:
+      upgrade: dist  
+
+  - name: Install TMUX package on Ubuntu VMs
+    apt:
+      name: tmux
+      state: latest
+     
+  
