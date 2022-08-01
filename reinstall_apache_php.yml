@@ -1,0 +1,42 @@
+---
+
+- hosts: LAB_ubuntu, LAB_centos, LAB_debian
+  become: true
+  tasks:
+
+  - name: Update repository index
+    apt:
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"  
+
+  - name: Uninstall Apache service
+    apt:
+      name: apache2
+      state: absent
+    when: ansible_distribution == "Ubuntu" 
+
+  - name: Uninstall PHP package for Apache
+    apt:
+      name: libapache2-mod-php 
+      state: absent
+    when: ansible_distribution == "Ubuntu" 
+  
+
+
+  - name: Update repository index
+    dnf:
+      update_cache: yes
+    when: ansible_distribution == "CentOS"  
+
+  - name: Uninstall HTTPD package on CentOS VMs
+    dnf:
+      name: httpd
+      state: absent
+    when: ansible_distribution == "CentOS" 
+
+  - name: Uninstall PHP support package for HTTPD
+    dnf:
+      name: php 
+      state: absent
+    when: ansible_distribution == "CentOS" 
+
