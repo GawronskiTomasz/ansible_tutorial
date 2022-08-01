@@ -20,3 +20,16 @@
       state: latest
     when: ansible_distribution == "Ubuntu" 
   
+
+
+  - name: Update repository index
+    dnf:
+      update_cache: yes
+    when: ansible_distribution == "CentOS"  
+
+  - name: Install TMUX package on CentOS VMs
+    dnf:
+      name: tmux
+      state: latest
+    when: ansible_distribution == "CentOS" 
+
