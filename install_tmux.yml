@@ -1,20 +1,22 @@
 ---
 
-- hosts: LAB_ubuntu
+- hosts: all
   become: true
   tasks:
 
   - name: Update repository index
     apt:
       update_cache: yes
+    when: ansible_distribution == "Ubuntu"  
 
   - name: Upgrade packages
     apt:
       upgrade: dist  
+    when: ansible_distribution == "Ubuntu" 
 
   - name: Install TMUX package on Ubuntu VMs
     apt:
       name: tmux
       state: latest
-     
+    when: ansible_distribution == "Ubuntu" 
   

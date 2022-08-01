@@ -1,11 +1,10 @@
 ---
 
-
 - hosts: all
   become: yes
   tasks:
 
-   - name: Set timezone to Asia/Tokyo
+   - name: Set timezone to Europe/Warsaw
      community.general.timezone:
         name: Europe/Warsaw
 
