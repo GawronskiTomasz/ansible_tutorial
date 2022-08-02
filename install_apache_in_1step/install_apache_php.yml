@@ -1,0 +1,14 @@
+---
+
+- hosts: LAB
+  become: true
+  tasks:
+
+  - name: Update package index, install Apache and PHP support service
+    package:
+      update_cache: yes
+      name: 
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+ 
+
