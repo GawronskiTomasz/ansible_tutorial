@@ -1,0 +1,12 @@
+---
+
+- hosts: LAB
+  become: true
+  tasks:
+
+  - name: Remove Apache ana PHP support
+    package:
+      name:
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      state: absent
