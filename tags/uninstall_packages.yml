@@ -1,0 +1,14 @@
+---
+
+- hosts: LAB
+  become: true
+  tasks:
+
+  - name: Uninstall apache, php, mariadb and samba packages
+    package:
+      name: 
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+        - "{{ mariadb_package }}"
+        - samba
+      state: absent

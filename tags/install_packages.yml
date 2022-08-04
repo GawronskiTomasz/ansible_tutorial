@@ -1,0 +1,59 @@
+---
+
+- hosts: LAB
+  become: true
+  tasks:
+
+  - name: Install updates (Ubuntu, Debian)
+    tags: always
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution in "'Debian', 'Ubuntu'"  
+
+  - name: Install updates (CentOS)
+    tags: always
+    dnf:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+
+
+- hosts: webservers
+  tags: apache,apache2,httpd
+  become: true
+  tasks: 
+
+  - name: Install Apache and PHP support service
+    package:
+      name: 
+        - "{{ apache_package }}"
+        - "{{ php_package  }}"
+      state: latest
+ 
+
+- hosts: db_servers
+  tags: maria,db,mariadb
+  become: true
+  tasks:
+
+  - name: Install mariadb package
+    package:
+      name: 
+        - "{{ mariadb_package }}"
+      state: latest
+
+
+
+- hosts: file_servers
+  tags: samba
+  become: true
+  tasks:
+
+  - name: Install files server
+    package:
+      name: 
+        - samba
+      state: latest
+
