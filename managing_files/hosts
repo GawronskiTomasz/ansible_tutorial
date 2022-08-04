@@ -15,7 +15,6 @@ centos01 ansible_host=192.168.0.105 ansible_python_interpreter=/usr/bin/python2
 
 [webservers]
 ubuntu01 ansible_host=192.168.0.101
-ubuntu04 ansible_host=192.168.0.104
 
 [db_servers]
 centos01 ansible_host=192.168.0.105 
@@ -25,6 +24,9 @@ ubuntu02 ansible_host=192.168.0.102
 debian01 ansible_host=192.168.0.106 ansible_user=tomek
 ubuntu03 ansible_host=192.168.0.103
 
+[workstations]
+ubuntu04 ansible_host=192.168.0.104
+
 [VPS]
 gaw1-server ansible_host=194.182.81.246 ansible_port=1996 
 
@@ -33,6 +35,7 @@ gaw1-server ansible_host=194.182.81.246 ansible_port=1996
 db_servers
 file_servers
 webservers
+workstations
 
 
 #Vars for host in inventory

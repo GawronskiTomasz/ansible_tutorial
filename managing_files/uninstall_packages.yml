@@ -4,11 +4,22 @@
   become: true
   tasks:
 
-  - name: Uninstall apache, php, mariadb and samba packages
+  - name: Uninstall apache, php, mariadb,samba and unzip packages
     package:
       name: 
         - "{{ apache_package }}"
         - "{{ php_package }}"
         - "{{ mariadb_package }}"
         - samba
+        - unzip
+      state: absent
+
+
+- hosts: workstations
+  become: true
+  tasks:
+
+  - name: Uninstall terraform
+    file:
+      path: /usr/local/bin/terraform
       state: absent

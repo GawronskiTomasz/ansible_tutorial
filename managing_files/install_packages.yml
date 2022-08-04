@@ -1,6 +1,6 @@
 ---
 
-- hosts: LAB
+- hosts: all
   become: true
   tasks:
 
@@ -19,6 +19,24 @@
     when: ansible_distribution == "CentOS"
 
 
+- hosts: workstations
+  become: true
+  tasks:
+
+    - name: Instal unzip
+      tags: unzip
+      package:
+        name: unzip
+
+    - name: Install terraform
+      tags: terraform
+      unarchive:
+        src: https://releases.hashicorp.com/terraform/1.2.6/terraform_1.2.6_linux_amd64.zip
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: 0755
+        owner: root
+        group: root
 
 - hosts: webservers
   tags: apache,apache2,httpd
