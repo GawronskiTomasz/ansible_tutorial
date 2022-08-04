@@ -1,0 +1,37 @@
+[LAB_ubuntu]
+ubuntu01 ansible_host=192.168.0.101
+ubuntu02 ansible_host=192.168.0.102
+ubuntu03 ansible_host=192.168.0.103
+ubuntu04 ansible_host=192.168.0.104
+
+[LAB_centos]
+centos01 ansible_host=192.168.0.105
+
+[LAB_debian]
+debian01 ansible_host=192.168.0.106 ansible_user=tomek
+
+[VPS]
+gaw1-server ansible_host=194.182.81.246 ansible_port=1996 
+
+
+
+[LAB:children]
+LAB_centos
+LAB_debian
+LAB_ubuntu
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[LAB_ubuntu:vars]
+apache_package=apache2
+php_package=libapache2-mod-php 
+
+[LAB_debian:vars]
+apache_package=apache2
+php_package=libapache2-mod-php
+
+[LAB_centos:vars]
+ansible_python_interpreter=/usr/bin/python2
+apache_package=httpd
+php_package=php
