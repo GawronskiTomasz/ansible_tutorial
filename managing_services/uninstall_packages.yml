@@ -1,0 +1,43 @@
+---
+
+- hosts: LAB
+  become: true
+  tasks:
+
+  - name: Uninstall apache, php, mariadb,samba and unzip packages
+    package:
+      name: 
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+        - "{{ mariadb_package }}"
+        - samba
+        - unzip
+      state: absent
+
+- hosts: webservers
+  become: true
+  tags: apache,apache2,httpd
+  tasks:
+
+  - name: Don't permit traffic in default zone on port 80/tcp
+    firewalld:
+      port: 80/tcp
+      permanent: yes
+      state: disabled
+    when: ansible_distribution == "CentOS"
+    register: firewalld
+
+  - name: Restart firewalld after don't permit traffic on port 80
+    service:
+      name: firewalld
+      state: restarted
+    when: firewalld.changed
+
+- hosts: workstations
+  become: true
+  tasks:
+
+  - name: Uninstall terraform
+    file:
+      path: /usr/local/bin/terraform
+      state: absent
