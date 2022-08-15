@@ -20,16 +20,15 @@
 
 
 - hosts: workstations
+  tags: terraform_install
   become: true
   tasks:
 
     - name: Instal unzip
-      tags: unzip
       package:
         name: unzip
 
     - name: Install terraform
-      tags: terraform
       unarchive:
         src: https://releases.hashicorp.com/terraform/1.2.6/terraform_1.2.6_linux_amd64.zip
         dest: /usr/local/bin
