@@ -58,7 +58,7 @@
     when: ansible_distribution == "CentOS"
     register: firewalld
 
-  - name: Restart firewalld after expose a port 80/tcp
+  - name: Restart firewalld after expose a port 80/tcp (CentOS)
     service: 
       name: firewalld
       state: restarted
